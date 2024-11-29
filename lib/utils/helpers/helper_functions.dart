@@ -1,6 +1,9 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class KHelperFunctions {
   static Color? getColor(String value) {
@@ -106,5 +109,16 @@ class KHelperFunctions {
       ));
     }
     return wrabbedList;
+  }
+
+  static Future<void> launchURL(String url) async {
+    Uri _url = Uri.parse(url);
+    // await launchUrl(_url);
+    // Check if the URL can be launched
+    try {
+      await launchUrl(_url);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

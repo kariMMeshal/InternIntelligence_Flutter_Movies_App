@@ -5,7 +5,7 @@ class KColors {
 
   // App basic Colors
   static const Color primary = Color(0xFF25233d);
-  static const Color secondary = Color.fromARGB(211, 24, 22, 52);
+  static const Color secondary = Color.fromARGB(210, 35, 32, 76);
   static const Color accent = Color(0xFFb0c7ff);
 
   //Gradiant Colors
@@ -36,7 +36,7 @@ class KColors {
   static const Color darkContainer = Colors.white;
 
   //Button Colors
-  static const Color buttonPrimary = Color(0xFFe00e33);
+  static const Color buttonPrimary = Color(0xFF911e05);
   static  Color buttonSecondary = const Color(0xFF6c757d);
   static const Color buttonDisabled = Color(0xFFc4c4c4);
 

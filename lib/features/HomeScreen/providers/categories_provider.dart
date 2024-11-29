@@ -11,7 +11,7 @@ class CategoriesProvider with ChangeNotifier {
     const endpoint = '3/genre/movie/list?language=en&';
     notifyListeners();
 
-    final response = await KHttpHelper.get(endpoint);
+    final response = await KHttpHelper.get(endpoint: endpoint);
 
     // Process the response
     categories = response["genres"];

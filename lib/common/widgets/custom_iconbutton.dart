@@ -12,7 +12,7 @@ class KCustomIconbutton {
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: KColors.darkGrey.withOpacity(0.3),
+        color: KColors.darkGrey.withOpacity(0.5),
         borderRadius: BorderRadius.circular(50),
       ),
       child: IconButton(

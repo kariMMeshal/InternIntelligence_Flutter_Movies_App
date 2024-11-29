@@ -45,7 +45,9 @@ dependencies:
   carousel_slider: ^5.0.0
   flutter_image_slideshow: ^0.1.6
   smooth_page_indicator: ^1.2.0+3
-  youtube_player_flutter: ^8.0.0
+  awesome_dialog: ^3.2.1
+  # youtube_player_flutter: ^8.0.0
+  # flutter_inappwebview: ^5.8.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

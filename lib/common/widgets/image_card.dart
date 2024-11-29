@@ -5,8 +5,8 @@ class KImageCard {
 
   static Container imageCard({required String imagePath}) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      width: 230,
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+      width: 200,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),

@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  awesome_dialog:
+    dependency: "direct main"
+    description:
+      name: awesome_dialog
+      sha256: "41c41ae4b30b5c7f26bb3d9f9c87010ed1cab0bb4d4ac0cc513e5799c37e9d82"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -86,14 +94,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.6"
-  flutter_inappwebview:
-    dependency: transitive
-    description:
-      name: flutter_inappwebview
-      sha256: d198297060d116b94048301ee6749cd2e7d03c1f2689783f52d210a6b7aba350
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.8.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -128,6 +128,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  graphs:
+    dependency: transitive
+    description:
+      name: graphs
+      sha256: "741bbf84165310a68ff28fe9e727332eef1407342fca52759cb21ad8177bb8d0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.2"
   http:
     dependency: "direct main"
     description:
@@ -304,6 +312,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.2"
+  rive:
+    dependency: transitive
+    description:
+      name: rive
+      sha256: fb18e38f9de28261e6f4a2d097dff419b4b741b13999fc6c2fd459481a0bbc6f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.13.18"
+  rive_common:
+    dependency: transitive
+    description:
+      name: rive_common
+      sha256: "031b29f7b1fc2732d06f60d053e0d7fbe0358fa19e991a91fa3991aa2760b240"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.13"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -469,14 +493,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
-  youtube_player_flutter:
-    dependency: "direct main"
-    description:
-      name: youtube_player_flutter
-      sha256: "72d487e1a1b9155a2dc9d448c137380791101a0ff623723195275ac275ac6942"
-      url: "https://pub.dev"
-    source: hosted
-    version: "8.1.2"
 sdks:
   dart: ">=3.5.4 <4.0.0"
   flutter: ">=3.24.0"

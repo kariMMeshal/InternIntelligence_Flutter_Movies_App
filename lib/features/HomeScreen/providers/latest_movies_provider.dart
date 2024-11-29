@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app_2/features/movies/models/movie_model.dart';
+import 'package:flutter_movie_app_2/features/HomeScreen/models/movie_model.dart';
 import 'package:flutter_movie_app_2/utils/https/http_client.dart';
 
 class LatestMoviesProvider with ChangeNotifier {
@@ -11,7 +11,7 @@ class LatestMoviesProvider with ChangeNotifier {
     const endpoint = '3/trending/movie/day?language=en-US&';
     notifyListeners();
 
-    final response = await KHttpHelper.get(endpoint);
+    final response = await KHttpHelper.get(endpoint: endpoint);
 
     // Process the response
     latestMovies = (response['results'] as List)

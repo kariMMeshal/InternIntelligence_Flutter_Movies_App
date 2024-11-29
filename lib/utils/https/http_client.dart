@@ -6,9 +6,9 @@ class KHttpHelper {
   static const String baseUrl = "https://api.themoviedb.org";
   static const String apiKey = "b2207859d08db5770d857929a86290bc";
 
-  static Future<Map<String, dynamic>> get(String endpoint) async {
+  static Future<Map<String, dynamic>> get({required String endpoint ,String bonusEndpoint="" } ) async {
     // Build the request URI
-    final uri = Uri.parse("$baseUrl/${endpoint}api_key=$apiKey");
+    final uri = Uri.parse("$baseUrl/${endpoint}api_key=$apiKey$bonusEndpoint");
 
     final response =
         await http.get(uri, headers: {"Accept": "application/json"});

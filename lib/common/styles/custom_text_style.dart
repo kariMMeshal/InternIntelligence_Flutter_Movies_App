@@ -15,7 +15,7 @@ class KCustomTextStyle {
   static TextStyle sectionsTextStyle() {
     return const TextStyle(
         color: KColors.textWhite,
-        fontSize: 26.0, // Text size
+        fontSize: 24.0, // Text size
         fontWeight: FontWeight.bold,
         letterSpacing: 1);
   }
@@ -23,7 +23,7 @@ class KCustomTextStyle {
   static TextStyle titleTextStyle() {
     return const TextStyle(
       color: KColors.textWhite,
-      fontSize: 35.0, // Text size
+      fontSize: 30.0, // Text size
       fontWeight: FontWeight.bold,
       letterSpacing: 1,
     );
@@ -31,10 +31,10 @@ class KCustomTextStyle {
 
   static TextStyle subTitleTextStyle() {
     return const TextStyle(
-      color: KColors.grey,
-      fontSize: 13.0, // Text size
+      overflow: TextOverflow.visible,
+      color: KColors.textSecondary,
+      fontSize: 12.0, // Text size
       fontWeight: FontWeight.bold,
-      letterSpacing: 1,
     );
   }
 }
