@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app_2/common/animations/fade_transition.dart';
-import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/widgets/custom_textfield.dart';
-import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/models/popular_section.dart';
-import 'package:flutter_movie_app_2/features/MovieDetailsScreen/movie_details_page.dart';
 import 'package:flutter_movie_app_2/features/searchScreen/models/searched_section.dart';
 import 'package:flutter_movie_app_2/features/searchScreen/providers/search_movies_provider.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +19,6 @@ class _SearchScreenState extends State<SearchScreen> {
     context.read<SearchMoviesProvider>().fetchMovies(
           searchText: searchText.text,
         );
-    print(context.read<SearchMoviesProvider>().fetchMovies(
-          searchText: searchText.text,
-        ));
   }
 
   @override

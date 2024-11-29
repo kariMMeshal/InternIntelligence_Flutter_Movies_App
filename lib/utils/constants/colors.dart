@@ -5,7 +5,7 @@ class KColors {
 
   // App basic Colors
   static const Color primary = Color(0xFF25233d);
-  static const Color secondary = Color.fromARGB(210, 35, 32, 76);
+  static const Color secondary = Color.fromARGB(210, 35, 41, 82);
   static const Color accent = Color(0xFFb0c7ff);
 
   //Gradiant Colors

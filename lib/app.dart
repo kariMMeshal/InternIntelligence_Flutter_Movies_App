@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_app_2/features/Auth/Screens/login_page.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/main_page.dart';
+import 'package:flutter_movie_app_2/utils/helpers/authFunctions/check_state.dart';
 import 'package:flutter_movie_app_2/utils/themes/theme.dart';
 
 class App extends StatefulWidget {
@@ -10,14 +12,31 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  bool? isVerified;
+
+  Future<void> getVerificationState() async {
+    isVerified = await CheckState.isUserSignedIn();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getVerificationState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const MainPage(),
       themeMode: ThemeMode.system,
       theme: KAppTheme.lightTheme,
       darkTheme: KAppTheme.darkTheme,
+      home: isVerified == null
+          ? const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            )
+          : (isVerified! ? const MainPage() : const LoginPage()),
     );
   }
 }

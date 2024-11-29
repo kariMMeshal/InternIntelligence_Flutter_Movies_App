@@ -73,17 +73,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         KPopularSection.popularSection(),
-        Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Latest Movies",
-                  style: KCustomTextStyle.sectionsTextStyle()),
-              Text("show all", style: KCustomTextStyle.buttonTextStyle()),
-            ],
-          ),
-        ),
         KLatestSection.latestSection(),
       ],
     );

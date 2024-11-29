@@ -4,9 +4,9 @@ import 'package:flutter_movie_app_2/utils/constants/colors.dart';
 class KCustomTextStyle {
   KCustomTextStyle._();
 
-  static TextStyle buttonTextStyle() {
-    return const TextStyle(
-        color: KColors.textWhite,
+  static TextStyle buttonTextStyle({Color? color}) {
+    return TextStyle(
+        color:color ??KColors.textWhite,
         fontSize: 18.0, // Text size
         fontWeight: FontWeight.w700,
         letterSpacing: 0.8);

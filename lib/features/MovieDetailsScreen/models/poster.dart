@@ -43,7 +43,7 @@ class KPoster {
           child: KCustomIconbutton.kiconButton(
             icon: const Icon(Icons.arrow_back_rounded),
             ontap: () {
-              Navigator.pop(context);
+              Navigator.popUntil(context, (route) => route.isFirst);
             },
           ),
         ),

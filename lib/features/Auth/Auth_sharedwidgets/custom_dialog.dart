@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 
-class CustomDialog {
+class KCustomDialog {
   BuildContext context;
   String message;
   String title;
@@ -11,7 +11,7 @@ class CustomDialog {
   void Function()? btnOkOnPress;
   void Function()? btnCancelOnPress;
 
-  CustomDialog({
+  KCustomDialog({
     required this.context,
     required this.message,
     required this.title,
