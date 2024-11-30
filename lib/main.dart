@@ -8,7 +8,7 @@ import 'package:flutter_movie_app_2/features/HomeScreen/providers/popular_movies
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/toprated_movie_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/similar_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/trailer_provider.dart';
-import 'package:flutter_movie_app_2/features/SavedScreen/saved_provider.dart';
+import 'package:flutter_movie_app_2/features/SavedScreen/providers/saved_provider.dart';
 import 'package:flutter_movie_app_2/features/searchScreen/providers/search_movies_provider.dart';
 import 'package:provider/provider.dart';
 

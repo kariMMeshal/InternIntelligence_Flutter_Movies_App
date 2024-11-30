@@ -33,7 +33,7 @@ class KCustomTextStyle {
     return const TextStyle(
       overflow: TextOverflow.visible,
       color: KColors.textSecondary,
-      fontSize: 12.0, // Text size
+      fontSize: 14.0, // Text size
       fontWeight: FontWeight.bold,
     );
   }

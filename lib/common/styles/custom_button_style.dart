@@ -18,35 +18,4 @@ class KCustomButtonStyle {
       ),
     );
   }
-
-  static longtextButton({
-    required String title,
-    required IconData iconData,
-    required Color backGroundColor,
-    Function? ontap,
-  }) {
-    return TextButton(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(
-          backGroundColor,
-        ),
-        minimumSize: WidgetStateProperty.all(
-          const Size(180, 50),
-        ),
-      ),
-      onPressed: () {
-        ontap!();
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Icon(iconData, color: Colors.white),
-          Text(
-            title,
-            style: KCustomTextStyle.buttonTextStyle(),
-          ),
-        ],
-      ),
-    );
-  }
 }

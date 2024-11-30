@@ -27,8 +27,8 @@ class KTrailerSection {
                           imagePath: trailerProvider.imageUrl!,
                         ),
                         Positioned(
-                          bottom: 70,
-                          left: 90,
+                          bottom: 50,
+                          left: 80,
                           child: InkWell(
                             onTap: () => KHelperFunctions.launchURL(
                                 trailerProvider.videoUrl!),

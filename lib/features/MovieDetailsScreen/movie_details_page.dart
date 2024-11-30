@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_button_style.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
+import 'package:flutter_movie_app_2/common/styles/long_text_button.dart';
+import 'package:flutter_movie_app_2/common/widgets/custom_iconbutton.dart';
 import 'package:flutter_movie_app_2/common/widgets/sliding_button.dart';
-import 'package:flutter_movie_app_2/features/MovieDetailsScreen/models/poster.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/models/similar_section.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/models/trailer_section.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/movie_detail_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/similar_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/trailer_provider.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
+import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/add_movie_func.dart';
 import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/check_is_saved.dart';
+import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/delete_movie.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetailsPage extends StatefulWidget {
@@ -35,7 +38,6 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
 
   Future<void> checkMovieStatus() async {
     isSaved = await checkIfMovieIsSaved(widget.movieId);
-    setState(() {});
   }
 
   @override
@@ -60,11 +62,83 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
           return ListView(
             children: [
               // Stack for the Image
-              KPoster.poster(movie: movie, context: context, isSaved: isSaved),
+              Stack(
+                children: [
+                  Hero(
+                    tag: "poster${movie!.id}",
+                    child: Image.network(
+                      "https://image.tmdb.org/t/p/original${movie.posterPath}",
+                      fit: BoxFit.cover,
+                      width: 500,
+                      height: 400,
+                      alignment: Alignment.topCenter,
+                      errorBuilder: (context, error, stackTrace) => const Icon(
+                          Icons.broken_image,
+                          size: 50,
+                          color: Colors.grey),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: 120, // Height of the gradient
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            KColors.primaryBackground.withOpacity(0.8),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    child: KCustomIconbutton.kiconButton(
+                      icon: const Icon(Icons.arrow_back_rounded),
+                      ontap: () {
+                        Navigator.popUntil(context, (route) => route.isFirst);
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    right: 70,
+                    top: 0,
+                    child: KCustomIconbutton.kiconButton(
+                      icon: isSaved
+                          ? const Icon(Icons.bookmark)
+                          : const Icon(Icons.bookmark_border_rounded),
+                      ontap: () async {
+                        if (isSaved) {
+                          isSaved = !isSaved;
+                          await deleteMovieFromFirestore(
+                              movie.id.toString(), context);
+                        } else {
+                          isSaved = !isSaved;
+                          await saveMovieToFirestore(
+                              movie.id.toString(), context);
+                        }
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: KCustomIconbutton.kiconButton(
+                      icon: const Icon(Icons.ios_share_rounded),
+                      ontap: () {},
+                    ),
+                  ),
+                ],
+              ),
               Column(
                 children: [
                   Text(
-                    movie!.title,
+                    movie.title,
                     style: KCustomTextStyle.titleTextStyle(),
                   ),
                   Row(
@@ -88,12 +162,12 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      KCustomButtonStyle.longtextButton(
+                      KLongTextButton.longtextButton(
                         title: "Play",
                         iconData: Icons.play_arrow,
                         backGroundColor: Colors.red,
                       ),
-                      KCustomButtonStyle.longtextButton(
+                      KLongTextButton.longtextButton(
                         title: "Download",
                         iconData: Icons.download,
                         backGroundColor: Colors.grey,

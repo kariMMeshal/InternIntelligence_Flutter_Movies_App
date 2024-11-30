@@ -17,13 +17,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? userName;
   String? email;
   bool isLoading = false;
-  User? user = FirebaseAuth.instance.currentUser;
+  User? user;
 
   Future<void> initializeUserData() async {
     try {
       isLoading = true;
       setState(() {});
-
+      user = FirebaseAuth.instance.currentUser;
       if (user != null) {
         userName = user!.displayName;
         email = user!.email;
@@ -32,7 +32,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         email = "No email available";
       }
     } catch (e) {
-      // Handle potential exceptions during data fetch
       debugPrint("Error fetching user data: $e");
       userName = "User";
       email = "No email available";
@@ -114,7 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 title: "My Profile",
                 icon: Icons.person,
                 isSeleted: true,
-                ontap: ()  {
+                ontap: () {
                   updateUserName();
                 }),
             KCustomListTile.customListTile(

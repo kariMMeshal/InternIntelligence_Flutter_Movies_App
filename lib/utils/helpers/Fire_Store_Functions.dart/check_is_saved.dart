@@ -6,21 +6,19 @@ Future<bool> checkIfMovieIsSaved(String movieId) async {
 
   if (user != null) {
     try {
-      // Get a reference to the user's 'movies' collection
       DocumentReference movieRef = FirebaseFirestore.instance
           .collection('users')
           .doc(user.uid)
           .collection('movies')
-          .doc(movieId);  // Use the movieId directly here
+          .doc(movieId);
 
-      // Check if the movie exists in the collection
       DocumentSnapshot movieSnapshot = await movieRef.get();
 
-      return movieSnapshot.exists;  // Return true if the movie exists, else false
+      return movieSnapshot.exists;
     } catch (e) {
       print("Error checking movie save status: $e");
-      return false;  // Return false in case of an error
+      return false;
     }
   }
-  return false;  // Return false if no user is logged in
+  return false;
 }
