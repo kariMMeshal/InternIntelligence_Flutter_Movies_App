@@ -3,7 +3,7 @@ import 'package:flutter_movie_app_2/common/styles/custom_button_style.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/widgets/image_slider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/models/latest_section.dart';
-import 'package:flutter_movie_app_2/features/HomeScreen/models/movie_model.dart';
+import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/models/popular_section.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/categories_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/latest_movies_provider.dart';

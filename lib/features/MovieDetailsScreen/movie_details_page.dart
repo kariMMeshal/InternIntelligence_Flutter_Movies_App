@@ -9,6 +9,7 @@ import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/movie_
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/similar_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/trailer_provider.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
+import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/check_is_saved.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetailsPage extends StatefulWidget {
@@ -21,6 +22,7 @@ class MovieDetailsPage extends StatefulWidget {
 
 class _MovieDetailsState extends State<MovieDetailsPage> {
   int activeButton = 0;
+  bool isSaved = false;
   void fetchData() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context
@@ -31,10 +33,16 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
     });
   }
 
+  Future<void> checkMovieStatus() async {
+    isSaved = await checkIfMovieIsSaved(widget.movieId);
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     fetchData();
+    checkMovieStatus();
   }
 
   @override
@@ -52,7 +60,7 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
           return ListView(
             children: [
               // Stack for the Image
-              KPoster.poster(movie, context),
+              KPoster.poster(movie: movie, context: context, isSaved: isSaved),
               Column(
                 children: [
                   Text(

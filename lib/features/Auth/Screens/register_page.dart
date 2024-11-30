@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/features/Auth/Auth_sharedwidgets/custom_buttonauth.dart';
@@ -92,12 +94,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     title: "Register ",
                     onPressed: () {
                       if (formState.currentState!.validate()) {
-                        KCreateAccount.createAccount(
-                          context,
-                          emailAddress: mail.text.trim(),
-                          password: password.text.trim(),
-                        );
-                        KSharedPrefsHelper.saveString("userName", name.text);
+                        KCreateAccount.createAccount(context,
+                            emailAddress: mail.text.trim(),
+                            password: password.text.trim(),
+                            userName: name.text);
                       }
                     },
                   ),

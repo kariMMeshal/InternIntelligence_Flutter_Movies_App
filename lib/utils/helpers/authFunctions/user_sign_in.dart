@@ -4,7 +4,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/features/Auth/Auth_sharedwidgets/custom_dialog.dart';
-import 'package:flutter_movie_app_2/features/HomeScreen/main_page.dart';
+import 'package:flutter_movie_app_2/main_page.dart';
 import 'package:flutter_movie_app_2/utils/helpers/authFunctions/check_state.dart';
 
 class KUserSignIn {

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/widgets/custom_navbar.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/home_page.dart';
-import 'package:flutter_movie_app_2/features/HomeScreen/models/movie_model.dart';
+import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/categories_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/latest_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/popular_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/toprated_movie_provider.dart';
+import 'package:flutter_movie_app_2/features/SavedScreen/saved_screen.dart';
 import 'package:flutter_movie_app_2/features/searchScreen/search_screen.dart';
 import 'package:flutter_movie_app_2/features/ProfileScreen/profile_screen.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
@@ -23,7 +24,7 @@ class _MainPageState extends State<MainPage> {
   List<Widget> pages = [
     const HomePage(),
     const SearchScreen(),
-    const SearchScreen(),
+    const SavedScreen(),
     const SearchScreen(),
     const ProfileScreen(),
   ];

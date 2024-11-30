@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/features/Auth/Screens/login_page.dart';
-import 'package:flutter_movie_app_2/features/HomeScreen/main_page.dart';
+import 'package:flutter_movie_app_2/main_page.dart';
 import 'package:flutter_movie_app_2/utils/helpers/authFunctions/check_state.dart';
 import 'package:flutter_movie_app_2/utils/themes/theme.dart';
 

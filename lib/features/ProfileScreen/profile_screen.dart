@@ -5,7 +5,6 @@ import 'package:flutter_movie_app_2/common/widgets/custom_listtile.dart';
 import 'package:flutter_movie_app_2/common/widgets/profile_custom_dialog.dart';
 import 'package:flutter_movie_app_2/features/Auth/Auth_sharedwidgets/login_logo.dart';
 import 'package:flutter_movie_app_2/utils/helpers/authFunctions/sign_out.dart';
-import 'package:flutter_movie_app_2/utils/helpers/shared_prefs_helper.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -18,16 +17,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? userName;
   String? email;
   bool isLoading = false;
+  User? user = FirebaseAuth.instance.currentUser;
 
   Future<void> initializeUserData() async {
     try {
       isLoading = true;
       setState(() {});
-      User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
-        userName = await KSharedPrefsHelper.getString("userName") ?? "User";
-        email = user.email ?? "No email available";
+        userName = user!.displayName;
+        email = user!.email;
       } else {
         userName = "User";
         email = "No email available";
@@ -45,17 +44,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  void updateUserName() {
+  Future<void> updateUserName() async {
     showDialog<String>(
       context: context,
       builder: (context) =>
           ChangeUsernameDialog(currentUserName: userName ?? "User"),
-    ).then((newUserName) {
+    ).then((newUserName) async {
       if (newUserName != null && newUserName != userName) {
-        setState(() {
-          userName = newUserName;
-        });
-        KSharedPrefsHelper.saveString("userName", newUserName);
+        try {
+          // Update the display name in Firebase Authentication
+          await user!.updateDisplayName(newUserName);
+          debugPrint("Display name updated in Firebase");
+
+          // Reload the user to get the latest data from Firebase
+          await user!.reload();
+          debugPrint("User reloaded");
+
+          // Fetch the updated user data
+          final updatedUser = FirebaseAuth.instance.currentUser;
+          if (updatedUser != null) {
+            debugPrint("Updated display name: ${updatedUser.displayName}");
+
+            // Update the local state with the new display name
+            setState(() {
+              userName = updatedUser
+                  .displayName; // Sync the display name from Firebase
+            });
+          } else {
+            debugPrint("Failed to fetch updated user.");
+          }
+        } catch (e) {
+          // Handle any error that may occur during the update
+          debugPrint("Error updating display name: $e");
+          // Optionally, show a custom error dialog to inform the user
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Error updating username. Please try again."),
+          ));
+        }
       }
     });
   }
@@ -89,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 title: "My Profile",
                 icon: Icons.person,
                 isSeleted: true,
-                ontap: () async {
+                ontap: ()  {
                   updateUserName();
                 }),
             KCustomListTile.customListTile(

@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/widgets/custom_iconbutton.dart';
-import 'package:flutter_movie_app_2/features/HomeScreen/models/movie_model.dart';
+import 'package:flutter_movie_app_2/features/SavedScreen/saved_provider.dart';
+import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/add_movie_func.dart';
+import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/delete_movie.dart';
+import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
+import 'package:provider/provider.dart';
 
 class KPoster {
   KPoster._();
 
-  static Stack poster(Movie? movie, BuildContext context) {
+  static Stack poster({
+    required Movie? movie,
+    required BuildContext context,
+    required bool isSaved,
+  }) {
     return Stack(
       children: [
         Hero(
@@ -50,11 +58,19 @@ class KPoster {
         Positioned(
           right: 70,
           top: 0,
-          child: KCustomIconbutton.kiconButton(
-            icon: const Icon(Icons.bookmark_border_rounded),
-            ontap: () {
-              Navigator.pop(context);
-            },
+          child: Consumer<SavedMoviesProvider>(
+            builder: (context, provider, child) => KCustomIconbutton.kiconButton(
+              icon: provider.isSaved
+                  ? const Icon(Icons.bookmark)
+                  : const Icon(Icons.bookmark_border_rounded),
+              ontap: () {
+                if (!isSaved) {
+                  saveMovieToFirestore(movie.id.toString(), context);
+                } else {
+                  deleteMovieFromFirestore(movie.id.toString(), context);
+                }
+              },
+            ),
           ),
         ),
         Positioned(
@@ -62,9 +78,7 @@ class KPoster {
           top: 0,
           child: KCustomIconbutton.kiconButton(
             icon: const Icon(Icons.ios_share_rounded),
-            ontap: () {
-              Navigator.pop(context);
-            },
+            ontap: () {},
           ),
         ),
       ],

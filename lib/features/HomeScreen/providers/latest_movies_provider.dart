@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app_2/features/HomeScreen/models/movie_model.dart';
+import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
 import 'package:flutter_movie_app_2/utils/https/http_client.dart';
 
 class LatestMoviesProvider with ChangeNotifier {

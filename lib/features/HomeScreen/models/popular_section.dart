@@ -4,7 +4,6 @@ import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/popular_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/movie_details_page.dart';
-import 'package:flutter_movie_app_2/utils/constants/colors.dart';
 import 'package:provider/provider.dart';
 
 class KPopularSection {
