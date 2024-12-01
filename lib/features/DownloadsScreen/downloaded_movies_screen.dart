@@ -1,30 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/features/DownloadsScreen/models/movie_card.dart';
-import 'package:flutter_movie_app_2/features/SavedScreen/providers/saved_provider.dart';
+import 'package:flutter_movie_app_2/features/DownloadsScreen/providers/downloaded_movies_provider.dart';
 
 import 'package:provider/provider.dart';
 
-class SavedScreen extends StatefulWidget {
-  const SavedScreen({super.key});
+class DownloadedScreen extends StatefulWidget {
+  const DownloadedScreen({super.key});
 
   @override
-  State<SavedScreen> createState() => _SavedScreenState();
+  State<DownloadedScreen> createState() => _DownloadedScreenState();
 }
 
-class _SavedScreenState extends State<SavedScreen> {
+class _DownloadedScreenState extends State<DownloadedScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<SavedMoviesProvider>().fetchSaved();
-    });
+
+    // Fetch downloaded movies based on the current user's ID
+    context.read<DownloadedMoviesProvider>().userId =
+        FirebaseAuth.instance.currentUser!.uid;
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
-    return Consumer<SavedMoviesProvider>(
+    return Consumer<DownloadedMoviesProvider>(
       builder: (context, provider, child) {
         if (provider.isLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -37,21 +38,21 @@ class _SavedScreenState extends State<SavedScreen> {
             children: [
               const SizedBox(height: 50),
               Text(
-                provider.savedMovies.isEmpty
-                    ? "No Saved Movies"
-                    : "Saved Movies",
+                provider.downloadedMovies.isEmpty
+                    ? "No Downloaded Movies"
+                    : "Downloads",
                 style: KCustomTextStyle.titleTextStyle(),
               ),
               const SizedBox(height: 20),
               Expanded(
                 child: ListView.builder(
-                  itemCount: provider.savedMovies.length,
+                  itemCount: provider.downloadedMovies.length,
                   itemBuilder: (context, index) {
-                    final movie = provider.savedMovies[index];
+                    final movie = provider.downloadedMovies[index];
                     return KMovieCard(
                       movie: movie,
                       onDeleteTap: () {
-                        provider.removeMovie(movie.id.toString());
+                        provider.removeMovieFromSqfile(movie.id);
                       },
                     );
                   },

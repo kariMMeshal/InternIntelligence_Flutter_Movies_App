@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/app.dart';
+import 'package:flutter_movie_app_2/features/DownloadsScreen/providers/downloaded_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/categories_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/latest_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/movie_detail_provider.dart';
@@ -27,6 +28,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SimilarProvider()),
         ChangeNotifierProvider(create: (_) => SearchMoviesProvider()),
         ChangeNotifierProvider(create: (_) => SavedMoviesProvider()),
+        ChangeNotifierProvider(create: (_) => DownloadedMoviesProvider()),
+
       ],
       child: const App(),
     ),

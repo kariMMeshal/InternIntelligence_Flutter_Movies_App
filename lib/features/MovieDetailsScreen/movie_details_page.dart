@@ -4,11 +4,13 @@ import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/styles/long_text_button.dart';
 import 'package:flutter_movie_app_2/common/widgets/custom_iconbutton.dart';
 import 'package:flutter_movie_app_2/common/widgets/sliding_button.dart';
+import 'package:flutter_movie_app_2/features/DownloadsScreen/providers/downloaded_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/models/similar_section.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/models/trailer_section.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/movie_detail_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/similar_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/trailer_provider.dart';
+import 'package:flutter_movie_app_2/features/SavedScreen/providers/saved_provider.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
 import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/add_movie_func.dart';
 import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/check_is_saved.dart';
@@ -104,25 +106,25 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                       },
                     ),
                   ),
-                  Positioned(
-                    right: 70,
-                    top: 0,
-                    child: KCustomIconbutton.kiconButton(
-                      icon: isSaved
-                          ? const Icon(Icons.bookmark)
-                          : const Icon(Icons.bookmark_border_rounded),
-                      ontap: () async {
-                        if (isSaved) {
-                          isSaved = !isSaved;
-                          await deleteMovieFromFirestore(
-                              movie.id.toString(), context);
-                        } else {
-                          isSaved = !isSaved;
-                          await saveMovieToFirestore(
-                              movie.id.toString(), context);
-                        }
-                        setState(() {});
-                      },
+                  Consumer<SavedMoviesProvider>(
+                    builder: (context, savedProvider, child) => Positioned(
+                      right: 70,
+                      top: 0,
+                      child: KCustomIconbutton.kiconButton(
+                        icon: isSaved
+                            ? const Icon(Icons.bookmark)
+                            : const Icon(Icons.bookmark_border_rounded),
+                        ontap: () async {
+                          if (isSaved) {
+                            isSaved = !isSaved;
+                            savedProvider.removeMovie(movie.id.toString());
+                          } else {
+                            isSaved = !isSaved;
+                            savedProvider.addMovie(movie);
+                          }
+                          setState(() {});
+                        },
+                      ),
                     ),
                   ),
                   Positioned(
@@ -168,6 +170,21 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                         backGroundColor: Colors.red,
                       ),
                       KLongTextButton.longtextButton(
+                        ontap: () {
+                          final provider =
+                              context.read<DownloadedMoviesProvider>();
+
+                          provider.addMovieToSqfliet(movie).then((_) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Movie downloaded successfully!'),
+                            ));
+                          }).catchError((error) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Error: $error'),
+                            ));
+                          });
+                        },
                         title: "Download",
                         iconData: Icons.download,
                         backGroundColor: Colors.grey,

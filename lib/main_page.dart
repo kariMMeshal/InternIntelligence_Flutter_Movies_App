@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/widgets/custom_navbar.dart';
+import 'package:flutter_movie_app_2/features/DownloadsScreen/downloaded_movies_screen.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/home_page.dart';
 import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/categories_provider.dart';
@@ -25,7 +26,7 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const SearchScreen(),
     const SavedScreen(),
-    const SearchScreen(),
+    const DownloadedScreen(),
     const ProfileScreen(),
   ];
   int activeIndex = 0;
