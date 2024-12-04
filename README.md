@@ -71,6 +71,7 @@ lib/
 ## 🌐 APIs Used
 - TMDB API: Provides movie data and recommendations.
 - Firebase: Handles authentication and cloud storage.
+- Note !! you have to get an API-KEY to use the app
 
 ---
 
