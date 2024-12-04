@@ -9,62 +9,69 @@ import 'package:provider/provider.dart';
 class KSearchedSection {
   KSearchedSection._();
 
-  static Expanded searchedMoviesSection() {
-    return Expanded(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 15, left: 20, bottom: 5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Search Results : ",
-                    style: KCustomTextStyle.sectionsTextStyle()),
-              ],
-            ),
+  static Widget searchedMoviesSection() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 15, left: 20, bottom: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Search Results : ",
+                  style: KCustomTextStyle.sectionsTextStyle()),
+            ],
           ),
-          Consumer<SearchMoviesProvider>(
-            builder: (context, provider, child) {
-              if (provider.isLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              return Expanded(
-                child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 5,
-                      crossAxisSpacing: 5,
-                      childAspectRatio: 0.6,
-                    ),
-                    // scrollDirection: Axis.horizontal,
-                    itemCount: provider.searchedMovies.length,
-                    itemBuilder: (context, index) {
-                      final movie = provider.searchedMovies[index];
-                      return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              fadeTransition(PageRouteBuilder(
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
+        ),
+        Consumer<SearchMoviesProvider>(
+          builder: (context, provider, child) {
+            if (provider.isLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (provider.searchedMovies.isEmpty) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 100.0),
+                child: Text(
+                  "Nope :/ ",
+                  style: KCustomTextStyle.titleTextStyle(),
+                ),
+              );
+            }
+
+            return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 5,
+                  childAspectRatio: 0.6,
+                ),
+                // scrollDirection: Axis.horizontal,
+                itemCount: provider.searchedMovies.length,
+                itemBuilder: (context, index) {
+                  final movie = provider.searchedMovies[index];
+                  return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          fadeTransition(PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
                                       MovieDetailsPage(
                                           movieId: movie.id.toString()))),
-                            );
-                          },
-                          child: Hero(
-                              tag: "searched_poster${movie.id}",
-                              child: KImageCard.imageCard(
-                                  imagePath:
-                                      "https://image.tmdb.org/t/p/original${movie.posterPath}")));
-                    }),
-              );
-            },
-          ),
-        ],
-      ),
+                        );
+                      },
+                      child: Hero(
+                          tag: "searched_poster${movie.id}",
+                          child: KImageCard.imageCard(
+                              imagePath:
+                                  "https://image.tmdb.org/t/p/original${movie.posterPath}")));
+                });
+          },
+        ),
+      ],
     );
   }
 }

@@ -8,20 +8,35 @@ class SearchMoviesProvider with ChangeNotifier {
 
   Future<void> fetchMovies({required String searchText}) async {
     isLoading = true;
+    notifyListeners();
+
+    if (searchText.trim().isEmpty) {
+      searchedMovies = [];
+      isLoading = false;
+      notifyListeners();
+      return;
+    }
+
     const endpoint = '3/search/movie?';
-    var bonusEndpoint = '&query=$searchText';
+    final bonusEndpoint = '&query=${searchText.trim()}';
 
-    notifyListeners();
+    try {
+      final response = await KHttpHelper.get(
+          endpoint: endpoint, bonusEndpoint: bonusEndpoint);
 
-    final response =
-        await KHttpHelper.get(endpoint: endpoint, bonusEndpoint: bonusEndpoint);
-
-    // Process the response
-    searchedMovies = (response['results'] as List)
-        .map((searchedMovies) => Movie.fromJson(searchedMovies))
-        .toList();
-
-    isLoading = false;
-    notifyListeners();
+      if (response['results'] is List) {
+        searchedMovies = (response['results'] as List)
+            .map((movieData) => Movie.fromJson(movieData))
+            .toList();
+      } else {
+        searchedMovies = [];
+      }
+    } catch (e) {
+      debugPrint('Error fetching movies: $e');
+      searchedMovies = [];
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
   }
 }

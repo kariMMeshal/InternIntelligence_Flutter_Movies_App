@@ -13,7 +13,6 @@ class PopularMovieProvider with ChangeNotifier {
 
     final response = await KHttpHelper.get(endpoint: endpoint);
 
-    // Process the response
     popularMovies = (response['results'] as List)
         .map((popularMovies) => Movie.fromJson(popularMovies))
         .toList();

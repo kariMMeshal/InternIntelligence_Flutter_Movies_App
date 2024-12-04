@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app_2/features/Auth/Screens/login_page.dart';
+import 'package:flutter_movie_app_2/features/AuthScreens/Screens/login_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class KSignOut {

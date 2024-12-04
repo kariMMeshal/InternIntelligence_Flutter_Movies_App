@@ -1,8 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app_2/features/Auth/Auth_sharedwidgets/custom_dialog.dart';
-import 'package:flutter_movie_app_2/features/Auth/Screens/login_page.dart';
+import 'package:flutter_movie_app_2/features/AuthScreens/Auth_sharedwidgets/custom_dialog.dart';
+import 'package:flutter_movie_app_2/features/AuthScreens/Screens/login_page.dart';
 
 class KCreateAccount {
   KCreateAccount._();
@@ -12,7 +12,7 @@ class KCreateAccount {
     showDialog(
       context: context,
       barrierDismissible: false, // Prevent dismissing the dialog
-      builder: (context) => Center(child: CircularProgressIndicator()),
+      builder: (context) => const Center(child: CircularProgressIndicator()),
     );
   }
 

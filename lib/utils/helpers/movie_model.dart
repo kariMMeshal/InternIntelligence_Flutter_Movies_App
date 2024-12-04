@@ -5,8 +5,8 @@ class Movie {
   final String description;
   final String releaseDate;
   final double rating;
-  final List<String>? genres; // Optional genres
-  final int? runtime; // Optional runtime
+  final List<String>? genres;
+  final int? runtime;
 
   Movie({
     required this.id,
@@ -19,23 +19,27 @@ class Movie {
     this.runtime,
   });
 
-  // A method to convert JSON into a Movie object
   factory Movie.fromJson(Map<String, dynamic> json) {
-    // Convert genres list from JSON
+    
     List<String>? genresList;
-    if (json['genres'] != null) {
+    if (json['genres'] != null && json['genres'] is List) {
       genresList = (json['genres'] as List)
-          .map((genre) => genre['name'] as String)
+          .map((genre) => genre['name'] as String? ?? '')
           .toList();
     }
 
     return Movie(
-      id: json['id'],
-      title: json['title'],
-      posterPath: json['poster_path'],
-      description: json['overview'],
-      releaseDate: json['release_date'],
-      rating: (json['vote_average'] as num).toDouble(),
+      id: json['id'] ?? 0, // Default to 0 if id is null
+      title:
+          json['title'] ?? 'Unknown', // Default to 'Unknown' if title is null
+      posterPath: json['poster_path'] ??
+          '', // Default to empty string if posterPath is null
+      description: json['overview'] ??
+          'No description available', // Default description if null
+      releaseDate: json['release_date'] ??
+          'Unknown', // Default to 'Unknown' if releaseDate is null
+      rating: (json['vote_average'] as num?)?.toDouble() ??
+          0.0, // Default to 0.0 if rating is null
       genres: genresList, // Assigning genres list
       runtime: json['runtime'], // runtime is optional
     );

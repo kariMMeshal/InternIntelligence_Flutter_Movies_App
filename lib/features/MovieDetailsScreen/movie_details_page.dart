@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app_2/common/styles/custom_button_style.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/styles/long_text_button.dart';
 import 'package:flutter_movie_app_2/common/widgets/custom_iconbutton.dart';
@@ -12,9 +11,7 @@ import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/simila
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/trailer_provider.dart';
 import 'package:flutter_movie_app_2/features/SavedScreen/providers/saved_provider.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
-import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/add_movie_func.dart';
 import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/check_is_saved.dart';
-import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/delete_movie.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetailsPage extends StatefulWidget {
@@ -35,6 +32,12 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
           .fetchMovieDetails(movieId: widget.movieId);
       context.read<SimilarProvider>().fetchMovies(movieId: widget.movieId);
       context.read<TrailerProvider>().fetchTrailerData(movieId: widget.movieId);
+    });
+  }
+
+  void onTabButtonTapped(int buttonIndex) {
+    setState(() {
+      activeButton = buttonIndex;
     });
   }
 
@@ -63,7 +66,6 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
 
           return ListView(
             children: [
-              // Stack for the Image
               Stack(
                 children: [
                   Hero(
@@ -72,7 +74,7 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                       "https://image.tmdb.org/t/p/original${movie.posterPath}",
                       fit: BoxFit.cover,
                       width: 500,
-                      height: 400,
+                      height: 550,
                       alignment: Alignment.topCenter,
                       errorBuilder: (context, error, stackTrace) => const Icon(
                           Icons.broken_image,
@@ -85,7 +87,7 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                     left: 0,
                     right: 0,
                     child: Container(
-                      height: 120, // Height of the gradient
+                      height: 120,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           begin: Alignment.topCenter,
@@ -139,6 +141,9 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
               ),
               Column(
                 children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     movie.title,
                     style: KCustomTextStyle.titleTextStyle(),
@@ -151,7 +156,7 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                         style: KCustomTextStyle.subTitleTextStyle(),
                       ),
                       Text(
-                        movie.genres!.join(","),
+                        movie.genres!.take(3).join(", "),
                         style: KCustomTextStyle.subTitleTextStyle(),
                       ),
                       Text(
@@ -179,10 +184,6 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                                 .showSnackBar(const SnackBar(
                               content: Text('Movie downloaded successfully!'),
                             ));
-                          }).catchError((error) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('Error: $error'),
-                            ));
                           });
                         },
                         title: "Download",
@@ -202,30 +203,21 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       InkWell(
-                        onTap: () {
-                          activeButton = 0;
-                          setState(() {});
-                        },
+                        onTap: () => onTabButtonTapped(0),
                         child: KSlidingButton.slidingButton(
                           title: "Episode",
                           isActive: activeButton == 0,
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-                          activeButton = 1;
-                          setState(() {});
-                        },
+                        onTap: () => onTabButtonTapped(1),
                         child: KSlidingButton.slidingButton(
                           title: "Similar",
                           isActive: activeButton == 1,
                         ),
                       ),
                       InkWell(
-                        onTap: () {
-                          activeButton = 2;
-                          setState(() {});
-                        },
+                        onTap: () => onTabButtonTapped(2),
                         child: KSlidingButton.slidingButton(
                           title: "About",
                           isActive: activeButton == 2,

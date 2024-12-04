@@ -1,18 +1,22 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class KHttpHelper {
-  static const String baseUrl = "https://api.themoviedb.org";
-  static const String apiKey = "b2207859d08db5770d857929a86290bc";
+  static String baseUrl = dotenv.env['BASE_URL'] ?? 'https://default.url';
+  static String apiKey = dotenv.env['API_KEY'] ?? '';
 
-  static Future<Map<String, dynamic>> get({required String endpoint ,String bonusEndpoint="" } ) async {
-    // Build the request URI
+  static Future<Map<String, dynamic>> get({
+    required String endpoint,
+    String bonusEndpoint = "",
+  }) async {
     final uri = Uri.parse("$baseUrl/${endpoint}api_key=$apiKey$bonusEndpoint");
 
     final response =
         await http.get(uri, headers: {"Accept": "application/json"});
-    // Handle the response
+    // print('API URL: $uri');
+    print('Response: ${response.body}');
     return handleResponse(response);
   }
 

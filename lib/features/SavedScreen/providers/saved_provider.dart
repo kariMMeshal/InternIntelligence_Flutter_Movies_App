@@ -16,14 +16,14 @@ class SavedMoviesProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addMovie(Movie movie) {
-    saveMovieToFirestore(movie);
+  Future<void> addMovie(Movie movie) async {
+    await saveMovieToFirestore(movie);
     savedMovies.add(movie);
     notifyListeners();
   }
 
-  void removeMovie(String movieId) {
-    deleteMovieFromFirestore(movieId);
+  Future<void> removeMovie(String movieId) async {
+    await deleteMovieFromFirestore(movieId);
     savedMovies.removeWhere((movie) => movie.id.toString() == movieId);
     notifyListeners();
   }

@@ -15,18 +15,14 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchText = TextEditingController();
 
-  void fetchData() {
-    context.read<SearchMoviesProvider>().fetchMovies(
-          searchText: searchText.text,
-        );
-  }
-
   @override
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      fetchData();
+      context
+          .read<SearchMoviesProvider>()
+          .fetchMovies(searchText: searchText.text);
     });
   }
 
@@ -38,33 +34,37 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 70),
-        KCustomTextfield(
-          icon: const Icon(Icons.search),
-          hint: "search by title",
-          myController: searchText,
-          onSubmit: () {
-            fetchData();
-          },
-          suffixOntap: () {
-            searchText.text = "";
-            FocusScope.of(context).unfocus();
-            fetchData();
-          },
-          prefixOntap: () {
-            FocusScope.of(context).unfocus();
-            fetchData();
-          },
-        ),
-        const SizedBox(
-          height: 50,
-        ),
-        searchText.text.isNotEmpty
-            ? KSearchedSection.searchedMoviesSection()
-            : KPopularSection.popularSection()
-      ],
+    return Consumer<SearchMoviesProvider>(
+      builder: (context, provider, child) => ListView(
+        children: [
+          const SizedBox(height: 40),
+          KCustomTextfield(
+            icon: const Icon(Icons.search),
+            hint: "search by title",
+            myController: searchText,
+            onSubmit: () {
+              print(searchText.text);
+              provider.fetchMovies(searchText: searchText.text);
+            },
+            suffixOntap: () {
+              searchText.text = "";
+              FocusScope.of(context).unfocus();
+              provider.fetchMovies(searchText: searchText.text);
+            },
+            prefixOntap: () {
+              print(searchText.text);
+              FocusScope.of(context).unfocus();
+              provider.fetchMovies(searchText: searchText.text);
+            },
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          searchText.text.isNotEmpty
+              ? KSearchedSection.searchedMoviesSection()
+              : KPopularSection.popularSection()
+        ],
+      ),
     );
   }
 }

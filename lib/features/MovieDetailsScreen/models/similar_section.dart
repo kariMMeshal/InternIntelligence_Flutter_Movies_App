@@ -26,7 +26,7 @@ class KSimilarSection {
               final movie = provider.similarMovies[index];
               return InkWell(
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       fadeTransition(PageRouteBuilder(
                           pageBuilder:

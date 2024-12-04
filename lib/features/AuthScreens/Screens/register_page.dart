@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
-import 'package:flutter_movie_app_2/features/Auth/Auth_sharedwidgets/custom_buttonauth.dart';
-import 'package:flutter_movie_app_2/features/Auth/Auth_sharedwidgets/custom_textfield.dart';
-import 'package:flutter_movie_app_2/features/Auth/Auth_sharedwidgets/login_logo.dart';
+import 'package:flutter_movie_app_2/features/AuthScreens/Auth_sharedwidgets/custom_buttonauth.dart';
+import 'package:flutter_movie_app_2/features/AuthScreens/Auth_sharedwidgets/custom_textfield.dart';
+import 'package:flutter_movie_app_2/features/AuthScreens/Auth_sharedwidgets/login_logo.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
 import 'package:flutter_movie_app_2/utils/helpers/authFunctions/create_account.dart';
 import 'package:flutter_movie_app_2/utils/helpers/shared_prefs_helper.dart';

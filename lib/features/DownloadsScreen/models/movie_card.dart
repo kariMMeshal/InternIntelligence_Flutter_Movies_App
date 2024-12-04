@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_app_2/common/animations/fade_transition.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/styles/long_text_button.dart';
 import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
@@ -42,11 +43,9 @@ class KMovieCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Row for Movie Title, Genres, and Delete Icon
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Flexible widget to prevent overflow
                       Flexible(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,8 +54,7 @@ class KMovieCard extends StatelessWidget {
                               movie.title,
                               style: KCustomTextStyle.buttonTextStyle(),
                               softWrap: true,
-                              overflow:
-                                  TextOverflow.ellipsis, // Handles overflow
+                              overflow: TextOverflow.ellipsis,
                             ),
                             Text(
                               movie.genres!.take(2).join(", "),
@@ -79,7 +77,7 @@ class KMovieCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Runtime: ${movie.runtime} min",
+                        "Runtime: ${movie.runtime! ~/ 60}h ${movie.runtime! % 60}m",
                         style: KCustomTextStyle.subTitleTextStyle(),
                       ),
                       Text(
@@ -89,13 +87,14 @@ class KMovieCard extends StatelessWidget {
                       const SizedBox(height: 10),
                       KLongTextButton.longtextButton(
                         ontap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MovieDetailsPage(
-                              movieId: movie.id.toString(),
-                            ),
-                          ),
-                        ),
+                            context,
+                            fadeTransition(
+                              PageRouteBuilder(
+                                  pageBuilder: (context, animation,
+                                          secondaryAnimation) =>
+                                      MovieDetailsPage(
+                                          movieId: movie.id.toString())),
+                            )),
                         title: "Watch Now ",
                         iconData: Icons.play_arrow,
                         backGroundColor: KColors.buttonPrimary,

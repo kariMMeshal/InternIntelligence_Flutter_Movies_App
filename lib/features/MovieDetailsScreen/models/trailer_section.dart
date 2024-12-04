@@ -16,62 +16,65 @@ class KTrailerSection {
           decoration: BoxDecoration(
               color: KColors.secondary,
               borderRadius: BorderRadius.circular(25)),
-          width: 400,
+          width: 450,
           height: 180,
           child: trailerProvider.key != ""
-              ? Row(
-                  children: [
-                    Stack(
-                      children: [
-                        KImageCard.imageCard(
-                          imagePath: trailerProvider.imageUrl!,
-                        ),
-                        Positioned(
-                          bottom: 50,
-                          left: 80,
-                          child: InkWell(
-                            onTap: () => KHelperFunctions.launchURL(
-                                trailerProvider.videoUrl!),
-                            child: const Icon(
-                              Icons.play_arrow_rounded,
-                              color: Colors.white,
-                              size: 50,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Expanded(
-                      child: Column(
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                    children: [
+                      Stack(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30, right: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Trailer",
-                                  style: KCustomTextStyle.sectionsTextStyle(),
-                                ),
-                                const Icon(
-                                  Icons.download,
-                                  color: Colors.white,
-                                )
-                              ],
-                            ),
+                          KImageCard.imageCard(
+                            imagePath: trailerProvider.imageUrl!,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: Text(
-                              trailerProvider.title!,
-                              style: KCustomTextStyle.subTitleTextStyle(),
+                          Positioned(
+                            bottom: 50,
+                            left: 80,
+                            child: InkWell(
+                              onTap: () => KHelperFunctions.launchURL(
+                                  trailerProvider.videoUrl!),
+                              child: const Icon(
+                                Icons.play_arrow_rounded,
+                                color: Colors.white,
+                                size: 50,
+                              ),
                             ),
                           )
                         ],
                       ),
-                    )
-                  ],
-                )
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30, right: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    " Trailer",
+                                    style: KCustomTextStyle.sectionsTextStyle(),
+                                  ),
+                                  const Icon(
+                                    Icons.download,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Text(
+                                trailerProvider.title!,
+                                style: KCustomTextStyle.subTitleTextStyle(),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+              )
               : Center(
                   child: Text("No Trailer availabe :/",
                       style: KCustomTextStyle.titleTextStyle())),

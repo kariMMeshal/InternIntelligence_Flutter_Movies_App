@@ -3,7 +3,6 @@ import 'package:flutter_movie_app_2/common/styles/custom_button_style.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/widgets/image_slider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/models/latest_section.dart';
-import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/models/popular_section.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/categories_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/latest_movies_provider.dart';
@@ -19,8 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Movie>? topRatedMovies;
-
   void fetchData() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<PopularMovieProvider>().fetchMovies();
@@ -38,18 +35,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    topRatedMovies = context.watch<TopRatedMovieProvider>().topRatedMovies;
     return ListView(
       children: [
-        KImageSlider.slider(movies: topRatedMovies!),
+        KImageSlider.moviesSlider(),
         Padding(
-          padding: const EdgeInsets.only(top: 10, left: 20),
+          padding: const EdgeInsets.only(top: 15, left: 20, bottom: 10),
           child: Text(
             "Categories",
             style: KCustomTextStyle.sectionsTextStyle(),
           ),
         ),
-        const SizedBox(height: 10),
         SizedBox(
           height: 40,
           child: Consumer<CategoriesProvider>(

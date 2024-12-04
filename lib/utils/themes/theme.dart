@@ -5,6 +5,7 @@ import 'package:flutter_movie_app_2/utils/themes/custom_themes/bottomsheet_theme
 import 'package:flutter_movie_app_2/utils/themes/custom_themes/checkbox_theme.dart';
 import 'package:flutter_movie_app_2/utils/themes/custom_themes/chip_theme.dart';
 import 'package:flutter_movie_app_2/utils/themes/custom_themes/elevated_button_theme.dart';
+import 'package:flutter_movie_app_2/utils/themes/custom_themes/navbar_theme.dart';
 import 'package:flutter_movie_app_2/utils/themes/custom_themes/outlined_button_theme.dart';
 import 'package:flutter_movie_app_2/utils/themes/custom_themes/text_field_theme.dart';
 import 'package:flutter_movie_app_2/utils/themes/custom_themes/text_theme.dart';
@@ -48,11 +49,6 @@ class KAppTheme {
     elevatedButtonTheme: KElevatedButtonTheme.darkElevatedButtonTheme,
     outlinedButtonTheme: KOutLinedButtonTheme.darkOutLinedButtonTheme,
     inputDecorationTheme: KTextFormFieldTheme.darkInputDecorationTheme,
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: KColors.secondary, // Explicitly set the background color
-      selectedItemColor: KColors.white, // Set selected icon and text color
-      unselectedItemColor: Colors.grey, // Set unselected icon and text color
-      elevation: 5, // Add elevation for visibility
-    ),
+    bottomNavigationBarTheme: KNavbarTheme.darkNavigationBarTheme,
   );
 }

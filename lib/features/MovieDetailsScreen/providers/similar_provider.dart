@@ -14,9 +14,13 @@ class SimilarProvider with ChangeNotifier {
     final response = await KHttpHelper.get(endpoint: endpoint);
 
     // Process the response
-    similarMovies = (response['results'] as List)
-        .map((similarMovies) => Movie.fromJson(similarMovies))
-        .toList();
+    try {
+      similarMovies = (response['results'] as List)
+          .map((similarMovies) => Movie.fromJson(similarMovies))
+          .toList();
+    } catch (e) {
+      rethrow;
+    }
 
     isLoading = false;
     notifyListeners();

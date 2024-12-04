@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class CheckState {
@@ -18,7 +19,7 @@ class CheckState {
       return await googleSignIn.isSignedIn() ||
           (FirebaseAuth.instance.currentUser?.emailVerified ?? false);
     } catch (e) {
-      print("Error checking sign-in state: $e");
+      debugPrint("Error checking sign-in state: $e");
       return false;
     }
   }

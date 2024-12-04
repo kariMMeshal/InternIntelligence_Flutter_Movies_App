@@ -52,7 +52,12 @@ class _DownloadedScreenState extends State<DownloadedScreen> {
                     return KMovieCard(
                       movie: movie,
                       onDeleteTap: () {
-                        provider.removeMovieFromSqfile(movie.id);
+                        provider.removeMovieFromSqfile(movie.id).then((_) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Movie Removed From Downloads :| '),
+                            ));
+                          }) ;
                       },
                     );
                   },

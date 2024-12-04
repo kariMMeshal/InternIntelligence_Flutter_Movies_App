@@ -35,14 +35,16 @@ class _SavedScreenState extends State<SavedScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 60),
               Text(
                 provider.savedMovies.isEmpty
                     ? "No Saved Movies"
                     : "Saved Movies",
                 style: KCustomTextStyle.titleTextStyle(),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(
+                height: 10,
+              ),
               Expanded(
                 child: ListView.builder(
                   itemCount: provider.savedMovies.length,
@@ -51,7 +53,12 @@ class _SavedScreenState extends State<SavedScreen> {
                     return KMovieCard(
                       movie: movie,
                       onDeleteTap: () {
-                        provider.removeMovie(movie.id.toString());
+                        provider.removeMovie(movie.id.toString()).then((_) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text('Movie Removed From Downloads :| '),
+                          ));
+                        });
                       },
                     );
                   },

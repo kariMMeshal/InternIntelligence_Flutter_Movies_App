@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/widgets/custom_listtile.dart';
 import 'package:flutter_movie_app_2/common/widgets/profile_custom_dialog.dart';
-import 'package:flutter_movie_app_2/features/Auth/Auth_sharedwidgets/login_logo.dart';
+import 'package:flutter_movie_app_2/features/AuthScreens/Auth_sharedwidgets/login_logo.dart';
 import 'package:flutter_movie_app_2/utils/helpers/authFunctions/sign_out.dart';
 
 class ProfileScreen extends StatefulWidget {

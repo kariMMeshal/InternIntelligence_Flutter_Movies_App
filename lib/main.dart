@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_movie_app_2/app.dart';
 import 'package:flutter_movie_app_2/features/DownloadsScreen/providers/downloaded_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/categories_provider.dart';
@@ -12,10 +13,16 @@ import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/traile
 import 'package:flutter_movie_app_2/features/SavedScreen/providers/saved_provider.dart';
 import 'package:flutter_movie_app_2/features/searchScreen/providers/search_movies_provider.dart';
 import 'package:provider/provider.dart';
+// Import the generated file
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // Load the .env file
+  await dotenv.load(fileName: 'api_constants.env');
   runApp(
     MultiProvider(
       providers: [
@@ -29,7 +36,6 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SearchMoviesProvider()),
         ChangeNotifierProvider(create: (_) => SavedMoviesProvider()),
         ChangeNotifierProvider(create: (_) => DownloadedMoviesProvider()),
-
       ],
       child: const App(),
     ),
