@@ -80,7 +80,7 @@ lib/
 
 I'm always open to feedback and would love to connect with you! Feel free to reach out on my social platforms:
 
-- 💼 [LinkedIn]([https://linkedin.com/in/your_username](https://www.linkedin.com/in/kareem-meshal-7706951a0/))
+- 💼 [LinkedIn] https://www.linkedin.com/in/kareem-meshal-7706951a0/
 - 📧 Email: Kareemkhdh543@gmail.com
 
 Let me know what you think about this project and how I can improve!
