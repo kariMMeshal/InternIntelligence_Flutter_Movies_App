@@ -20,7 +20,6 @@ class Movie {
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
-    
     List<String>? genresList;
     if (json['genres'] != null && json['genres'] is List) {
       genresList = (json['genres'] as List)
@@ -30,10 +29,8 @@ class Movie {
 
     return Movie(
       id: json['id'] ?? 0, // Default to 0 if id is null
-      title:
-          json['title'] ?? 'Unknown', // Default to 'Unknown' if title is null
-      posterPath: json['poster_path'] ??
-          '', // Default to empty string if posterPath is null
+      title: json['title'] ?? 'Unknown',
+      posterPath: json['poster_path'] ?? '',
       description: json['overview'] ??
           'No description available', // Default description if null
       releaseDate: json['release_date'] ??

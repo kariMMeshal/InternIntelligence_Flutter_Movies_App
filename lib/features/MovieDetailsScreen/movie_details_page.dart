@@ -231,13 +231,9 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                         ? KTrailerSection.trailerSection()
                         : activeButton == 1
                             ? KSimilarSection.similarSection()
-                            : Column(
-                                children: [
-                                  Text(
-                                    movie.description,
-                                    style: KCustomTextStyle.subTitleTextStyle(),
-                                  ),
-                                ],
+                            : Text(
+                                movie.description,
+                                style: KCustomTextStyle.subTitleTextStyle(),
                               ),
                   ),
                 ],

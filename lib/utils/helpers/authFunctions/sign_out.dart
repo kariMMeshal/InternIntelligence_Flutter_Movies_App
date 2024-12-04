@@ -11,7 +11,7 @@ class KSignOut {
     googleSignIn.disconnect();
     await FirebaseAuth.instance.signOut();
 
-    print("======= You are Signed Out  ========");
+    debugPrint("======= You are Signed Out  ========");
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const LoginPage()));
   }

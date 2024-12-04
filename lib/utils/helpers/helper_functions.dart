@@ -1,8 +1,14 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_app_2/common/animations/fade_transition.dart';
+import 'package:flutter_movie_app_2/features/MovieDetailsScreen/movie_details_page.dart';
+import 'package:flutter_movie_app_2/features/searchScreen/providers/recommended_provider.dart';
+import 'package:flutter_movie_app_2/utils/helpers/authFunctions/get_userid.dart';
+import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class KHelperFunctions {
@@ -61,12 +67,26 @@ class KHelperFunctions {
     );
   }
 
-  static void navigateToScreen(BuildContext context, Widget screen) {
+  static Future<void> navigateToMovieDetails(
+    BuildContext context,
+    Movie movie,
+  ) async {
+    String? userId = await getUserId();
+
+    if (userId != null) {
+      await Provider.of<RecommendedProvider>(context, listen: false)
+          .addClickedMovie(userId, movie);
+    }
+
     Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => screen,
-        ));
+      context,
+      fadeTransition(
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              MovieDetailsPage(movieId: movie.id.toString()),
+        ),
+      ),
+    );
   }
 
   static String truncateText(String text, int maxLength) {

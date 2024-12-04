@@ -1,20 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/check_is_saved.dart';
 import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart'; // Assuming Movie is imported here
 
 Future<void> saveMovieToFirestore(Movie movie) async {
   User? user = FirebaseAuth.instance.currentUser;
   bool isSaved = false;
-  print("saving....>.....>");
+  debugPrint("saving....>.....>");
 
   if (user != null) {
     try {
       // Check if the movie is already saved using movieId
       isSaved = await checkIfMovieIsSaved(movie.id.toString());
-      print(isSaved);
       if (isSaved) {
-        print("Movie is already saved!");
+        debugPrint("Movie is already saved!");
         return;
       }
 
@@ -38,9 +38,9 @@ Future<void> saveMovieToFirestore(Movie movie) async {
 
       await movieRef.set(movieData);
 
-      print("Movie saved to Firestore!");
+      debugPrint("Movie saved to Firestore!");
     } catch (e) {
-      print("Error saving movie: $e");
+      debugPrint("Error saving movie: $e");
     }
   }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movie_app_2/common/animations/fade_transition.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/styles/long_text_button.dart';
 import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
-import 'package:flutter_movie_app_2/features/MovieDetailsScreen/movie_details_page.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
+import 'package:flutter_movie_app_2/utils/helpers/helper_functions.dart';
 import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
 
 class KMovieCard extends StatelessWidget {
@@ -25,7 +24,6 @@ class KMovieCard extends StatelessWidget {
       height: 250,
       child: Row(
         children: [
-          // Movie Poster
           SizedBox(
             width: 170,
             height: 250,
@@ -35,7 +33,6 @@ class KMovieCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          // Movie Info
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
@@ -86,15 +83,8 @@ class KMovieCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       KLongTextButton.longtextButton(
-                        ontap: () => Navigator.push(
-                            context,
-                            fadeTransition(
-                              PageRouteBuilder(
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
-                                      MovieDetailsPage(
-                                          movieId: movie.id.toString())),
-                            )),
+                        ontap: () => KHelperFunctions.navigateToMovieDetails(
+                            context, movie),
                         title: "Watch Now ",
                         iconData: Icons.play_arrow,
                         backGroundColor: KColors.buttonPrimary,

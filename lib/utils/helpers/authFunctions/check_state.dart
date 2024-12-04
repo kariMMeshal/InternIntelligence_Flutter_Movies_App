@@ -7,7 +7,7 @@ class CheckState {
 
   static void getState() {
     FirebaseAuth.instance.authStateChanges().listen((user) {
-      print(user == null
+      debugPrint(user == null
           ? '===== User is currently signed out! ====='
           : '===== User is signed in! ======');
     });

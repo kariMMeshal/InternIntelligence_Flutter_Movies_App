@@ -3,6 +3,8 @@ import 'package:flutter_movie_app_2/common/animations/fade_transition.dart';
 import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/movie_details_page.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/similar_provider.dart';
+import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/user_activity_firestore.dart';
+import 'package:flutter_movie_app_2/utils/helpers/authFunctions/get_userid.dart';
 import 'package:provider/provider.dart';
 
 class KSimilarSection {
@@ -25,7 +27,9 @@ class KSimilarSection {
             itemBuilder: (context, index) {
               final movie = provider.similarMovies[index];
               return InkWell(
-                onTap: () {
+                onTap: () async {
+                  String? userId = await getUserId();
+                  KUserActivityService().addClickedMovie(userId!, movie);
                   Navigator.pushReplacement(
                       context,
                       fadeTransition(PageRouteBuilder(

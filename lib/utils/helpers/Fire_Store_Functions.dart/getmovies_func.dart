@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
 
 Future<List<Movie>> getMoviesFromFirestore() async {
@@ -35,9 +36,9 @@ Future<List<Movie>> getMoviesFromFirestore() async {
         savedMoviesList.add(movie);
       }
 
-      print("Movies fetched from Firestore!");
+      // print("Movies fetched from Firestore!");
     } catch (e) {
-      print("Error fetching movies: $e");
+      debugPrint("Error fetching movies: $e");
     }
   }
 

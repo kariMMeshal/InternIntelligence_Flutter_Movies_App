@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
-import 'package:flutter_movie_app_2/features/DownloadsScreen/models/movie_card.dart';
+import 'package:flutter_movie_app_2/common/widgets/movie_card.dart';
 import 'package:flutter_movie_app_2/features/SavedScreen/providers/saved_provider.dart';
 
 import 'package:provider/provider.dart';
@@ -42,9 +42,7 @@ class _SavedScreenState extends State<SavedScreen> {
                     : "Saved Movies",
                 style: KCustomTextStyle.titleTextStyle(),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 5),
               Expanded(
                 child: ListView.builder(
                   itemCount: provider.savedMovies.length,

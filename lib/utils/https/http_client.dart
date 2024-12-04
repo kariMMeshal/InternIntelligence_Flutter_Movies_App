@@ -15,6 +15,8 @@ class KHttpHelper {
 
     final response =
         await http.get(uri, headers: {"Accept": "application/json"});
+    print('API URL: $uri');
+    // print('Response: ${response.body}');
     return handleResponse(response);
   }
 

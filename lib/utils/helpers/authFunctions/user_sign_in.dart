@@ -66,7 +66,7 @@ class KUserSignIn {
           break;
         default:
           errorMessage = 'An unknown error occurred.';
-          print(e.code);
+          debugPrint(e.code);
       }
 
       KCustomDialog(
@@ -75,10 +75,10 @@ class KUserSignIn {
               title: "Erorr",
               dialogType: DialogType.error)
           .customDialog();
-      print(
+      debugPrint(
           "Attempting to sign in with email: $emailAddress and password: $password");
-      print('=======> Error code: ${e.code}');
-      print('=======> Error message: ${e.message}');
+      debugPrint('=======> Error code: ${e.code}');
+      debugPrint('=======> Error message: ${e.message}');
     }
   }
 }

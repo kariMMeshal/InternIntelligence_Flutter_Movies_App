@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 Future<bool> checkIfMovieIsSaved(String movieId) async {
   User? user = FirebaseAuth.instance.currentUser;
@@ -16,7 +17,7 @@ Future<bool> checkIfMovieIsSaved(String movieId) async {
 
       return movieSnapshot.exists;
     } catch (e) {
-      print("Error checking movie save status: $e");
+      debugPrint("Error checking movie save status: $e");
       return false;
     }
   }

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_movie_app_2/app.dart';
+import 'package:flutter_movie_app_2/features/CategoryScreen/providers/category_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/DownloadsScreen/providers/downloaded_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/categories_provider.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/latest_movies_provider.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_movie_app_2/features/HomeScreen/providers/toprated_movie
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/similar_provider.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/trailer_provider.dart';
 import 'package:flutter_movie_app_2/features/SavedScreen/providers/saved_provider.dart';
+import 'package:flutter_movie_app_2/features/searchScreen/providers/recommended_provider.dart';
 import 'package:flutter_movie_app_2/features/searchScreen/providers/search_movies_provider.dart';
 import 'package:provider/provider.dart';
 // Import the generated file
@@ -38,6 +40,8 @@ void main() async {
         ChangeNotifierProvider(create: (_) => SearchMoviesProvider()),
         ChangeNotifierProvider(create: (_) => SavedMoviesProvider()),
         ChangeNotifierProvider(create: (_) => DownloadedMoviesProvider()),
+        ChangeNotifierProvider(create: (_) => RecommendedProvider()),
+        ChangeNotifierProvider(create: (_) => CategoryMoviesProvider()),
       ],
       child: const App(),
     ),

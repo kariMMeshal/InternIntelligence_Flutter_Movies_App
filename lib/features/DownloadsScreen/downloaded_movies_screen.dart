@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
-import 'package:flutter_movie_app_2/features/DownloadsScreen/models/movie_card.dart';
+import 'package:flutter_movie_app_2/common/widgets/movie_card.dart';
 import 'package:flutter_movie_app_2/features/DownloadsScreen/providers/downloaded_movies_provider.dart';
 
 import 'package:provider/provider.dart';
@@ -43,7 +43,7 @@ class _DownloadedScreenState extends State<DownloadedScreen> {
                     : "Downloads",
                 style: KCustomTextStyle.titleTextStyle(),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 5),
               Expanded(
                 child: ListView.builder(
                   itemCount: provider.downloadedMovies.length,
