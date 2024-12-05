@@ -54,7 +54,7 @@ class _SavedScreenState extends State<SavedScreen> {
                         provider.removeMovie(movie.id.toString()).then((_) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
-                            content: Text('Movie Removed From Downloads :| '),
+                            content: Text('Movie Removed From Saved :) '),
                           ));
                         });
                       },

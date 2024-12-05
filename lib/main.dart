@@ -15,7 +15,6 @@ import 'package:flutter_movie_app_2/features/SavedScreen/providers/saved_provide
 import 'package:flutter_movie_app_2/features/searchScreen/providers/recommended_provider.dart';
 import 'package:flutter_movie_app_2/features/searchScreen/providers/search_movies_provider.dart';
 import 'package:provider/provider.dart';
-// Import the generated file
 import 'firebase_options.dart';
 
 void main() async {

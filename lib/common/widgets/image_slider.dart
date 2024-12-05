@@ -18,7 +18,7 @@ class KImageSlider {
             autoPlay: true,
             autoPlayCurve: Curves.linearToEaseOut,
             enlargeCenterPage: true,
-            autoPlayInterval: const Duration(seconds: 15),
+            autoPlayInterval: const Duration(seconds: 10),
           ),
           items: List.generate(movies.length, (i) {
             return Builder(

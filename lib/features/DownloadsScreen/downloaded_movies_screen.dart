@@ -55,7 +55,7 @@ class _DownloadedScreenState extends State<DownloadedScreen> {
                         provider.removeMovieFromSqfile(movie.id).then((_) {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
-                              content: Text('Movie Removed From Downloads :| '),
+                              content: Text('Movie Removed From Downloads :) '),
                             ));
                           }) ;
                       },

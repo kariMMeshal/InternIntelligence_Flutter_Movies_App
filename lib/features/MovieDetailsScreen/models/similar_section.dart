@@ -20,28 +20,37 @@ class KSimilarSection {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: provider.similarMovies.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 5,
-                childAspectRatio: 0.6),
+              crossAxisCount: 3,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+              childAspectRatio: 0.6,
+            ),
             itemBuilder: (context, index) {
               final movie = provider.similarMovies[index];
+
+              // Safe null check for posterPath
+              final posterPath = movie.posterPath;
+              final imageUrl = posterPath != null
+                  ? "https://image.tmdb.org/t/p/original$posterPath"
+                  : ''; // Fallback if posterPath is null
+
               return InkWell(
                 onTap: () async {
                   String? userId = await getUserId();
-                  KUserActivityService().addClickedMovie(userId!, movie);
-                  Navigator.pushReplacement(
+                  if (userId != null) {
+                    KUserActivityService().addClickedMovie(userId, movie);
+                    Navigator.pushReplacement(
                       context,
                       fadeTransition(PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  MovieDetailsPage(
-                                    movieId: movie.id.toString(),
-                                  ))));
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            MovieDetailsPage(
+                              movieId: movie.id.toString(),
+                            ),
+                      )),
+                    );
+                  }
                 },
-                child: KCashedImage.customCachedImage(
-                  "https://image.tmdb.org/t/p/original${movie.posterPath}",
-                ),
+                child: KCashedImage.customCachedImage(imageUrl),
               );
             },
           ),
