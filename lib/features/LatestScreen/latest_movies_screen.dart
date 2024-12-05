@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
-import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
+import 'package:flutter_movie_app_2/common/widgets/cashed_image.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/latest_movies_provider.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
 import 'package:flutter_movie_app_2/utils/helpers/helper_functions.dart';
@@ -44,8 +44,8 @@ class _LatestMoviesScreenState extends State<LatestMoviesScreen> {
         return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 5,
-              crossAxisSpacing: 5,
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 15,
               childAspectRatio: 0.6,
             ),
             itemCount: provider.latestMovies.length,
@@ -57,9 +57,8 @@ class _LatestMoviesScreenState extends State<LatestMoviesScreen> {
                   },
                   child: Hero(
                       tag: "searched_poster${movie.id}",
-                      child: KImageCard.imageCard(
-                          imagePath:
-                              "https://image.tmdb.org/t/p/original${movie.posterPath}")));
+                      child: KCashedImage.customCachedImage(
+                          "https://image.tmdb.org/t/p/original${movie.posterPath}")));
             });
       }),
     );

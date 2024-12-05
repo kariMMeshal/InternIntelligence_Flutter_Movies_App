@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/features/AuthScreens/Auth_sharedwidgets/custom_buttonauth.dart';
 import 'package:flutter_movie_app_2/features/AuthScreens/Auth_sharedwidgets/custom_dialog.dart';
 import 'package:flutter_movie_app_2/features/AuthScreens/Auth_sharedwidgets/custom_textfield.dart';
+import 'package:flutter_movie_app_2/utils/constants/colors.dart';
 
 class ResetPass extends StatefulWidget {
   const ResetPass({super.key});
@@ -19,7 +20,10 @@ class _ResetPassState extends State<ResetPass> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: KColors.primaryBackground ,
+      appBar: AppBar(
+        
+      ),
       body: Center(
         child: Form(
           key: formState,

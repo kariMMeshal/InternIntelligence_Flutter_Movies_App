@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
-import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
+import 'package:flutter_movie_app_2/common/widgets/cashed_image.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/latest_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/LatestScreen/latest_movies_screen.dart';
 import 'package:flutter_movie_app_2/utils/helpers/helper_functions.dart';
@@ -10,7 +12,7 @@ Widget latestSection(BuildContext context) {
   return Column(
     children: [
       Padding(
-        padding: const EdgeInsets.only(top: 10, left: 20),
+        padding: const EdgeInsets.only(top: 10, left: 20 ,),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -37,7 +39,7 @@ Widget latestSection(BuildContext context) {
           builder: (context, latestMoviesProvider, child) {
             return ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: latestMoviesProvider.latestMovies.length,
+              itemCount: min(8, latestMoviesProvider.latestMovies.length),
               itemBuilder: (context, index) {
                 final latestMovie = latestMoviesProvider.latestMovies[index];
                 return InkWell(
@@ -47,9 +49,11 @@ Widget latestSection(BuildContext context) {
                     },
                     child: Hero(
                         tag: "latest_poster${latestMovie.id}",
-                        child: KImageCard.imageCard(
-                            imagePath:
-                                "https://image.tmdb.org/t/p/original${latestMovie.posterPath}")));
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 10),
+                          child: KCashedImage.customCachedImage(
+                              "https://image.tmdb.org/t/p/original${latestMovie.posterPath}"),
+                        )));
               },
             );
           },

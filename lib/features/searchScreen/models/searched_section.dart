@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
-import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
+import 'package:flutter_movie_app_2/common/widgets/cashed_image.dart';
 import 'package:flutter_movie_app_2/features/searchScreen/providers/search_movies_provider.dart';
 import 'package:flutter_movie_app_2/utils/helpers/helper_functions.dart';
 import 'package:provider/provider.dart';
@@ -53,9 +53,8 @@ Widget searchedMoviesSection() {
                     },
                     child: Hero(
                         tag: "searched_poster${movie.id}",
-                        child: KImageCard.imageCard(
-                            imagePath:
-                                "https://image.tmdb.org/t/p/original${movie.posterPath}")));
+                        child: KCashedImage.customCachedImage(
+                            "https://image.tmdb.org/t/p/original${movie.posterPath}")));
               });
         },
       ),

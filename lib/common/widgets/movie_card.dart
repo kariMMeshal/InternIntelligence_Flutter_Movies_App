@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/styles/long_text_button.dart';
-import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
+import 'package:flutter_movie_app_2/common/widgets/cashed_image.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
 import 'package:flutter_movie_app_2/utils/helpers/helper_functions.dart';
 import 'package:flutter_movie_app_2/utils/helpers/movie_model.dart';
@@ -27,9 +27,8 @@ class KMovieCard extends StatelessWidget {
           SizedBox(
             width: 170,
             height: 250,
-            child: KImageCard.imageCard(
-              imagePath:
-                  "https://image.tmdb.org/t/p/original${movie.posterPath}",
+            child: KCashedImage.customCachedImage(
+              "https://image.tmdb.org/t/p/original${movie.posterPath}",
             ),
           ),
           const SizedBox(width: 10),

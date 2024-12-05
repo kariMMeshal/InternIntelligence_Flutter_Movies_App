@@ -1,6 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
-import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
+import 'package:flutter_movie_app_2/common/widgets/cashed_image.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/popular_movies_provider.dart';
 import 'package:flutter_movie_app_2/features/PopualrScreen/popular_screen.dart';
 import 'package:flutter_movie_app_2/utils/helpers/helper_functions.dart';
@@ -37,7 +39,7 @@ Widget popularSection(BuildContext context) {
           builder: (context, provider, child) {
             return ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: provider.popularMovies.length,
+                itemCount: min(8, provider.popularMovies.length),
                 itemBuilder: (context, index) {
                   final movie = provider.popularMovies[index];
                   return InkWell(
@@ -46,9 +48,11 @@ Widget popularSection(BuildContext context) {
                       },
                       child: Hero(
                           tag: "popular_poster${movie.id}",
-                          child: KImageCard.imageCard(
-                              imagePath:
-                                  "https://image.tmdb.org/t/p/original${movie.posterPath}")));
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            child: KCashedImage.customCachedImage(
+                                "https://image.tmdb.org/t/p/original${movie.posterPath}"),
+                          )));
                 });
           },
         ),

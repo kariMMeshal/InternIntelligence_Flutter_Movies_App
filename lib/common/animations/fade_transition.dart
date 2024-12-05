@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // Updated method to accept a PageRouteBuilder
 PageRouteBuilder fadeTransition(PageRouteBuilder pageRouteBuilder) {
   return PageRouteBuilder(
-    transitionDuration: const Duration(milliseconds:1100),
+    transitionDuration: const Duration(seconds: 1),
     pageBuilder: pageRouteBuilder.pageBuilder,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
       // Create a scale animation
@@ -17,7 +17,7 @@ PageRouteBuilder fadeTransition(PageRouteBuilder pageRouteBuilder) {
 
       // Create a fade animation
       final fadeAnimation =
-          Tween<double>(begin: 0.7, end: 1.0).animate(animation);
+          Tween<double>(begin: 0.8, end: 1.0).animate(animation);
 
       // Combine both scale and fade transitions
       return FadeTransition(

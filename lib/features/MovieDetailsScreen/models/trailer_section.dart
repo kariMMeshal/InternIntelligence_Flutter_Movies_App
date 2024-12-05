@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
-import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
+import 'package:flutter_movie_app_2/common/widgets/cashed_image.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/trailer_provider.dart';
 import 'package:flutter_movie_app_2/utils/constants/colors.dart';
 import 'package:flutter_movie_app_2/utils/helpers/helper_functions.dart';
@@ -20,13 +20,13 @@ class KTrailerSection {
           height: 180,
           child: trailerProvider.key != ""
               ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
                     children: [
                       Stack(
                         children: [
-                          KImageCard.imageCard(
-                            imagePath: trailerProvider.imageUrl!,
+                          KCashedImage.customCachedImage(
+                            trailerProvider.imageUrl!,
                           ),
                           Positioned(
                             bottom: 50,
@@ -47,9 +47,11 @@ class KTrailerSection {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 30, right: 10),
+                              padding:
+                                  const EdgeInsets.only(top: 30, right: 10),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     " Trailer",
@@ -74,7 +76,7 @@ class KTrailerSection {
                       )
                     ],
                   ),
-              )
+                )
               : Center(
                   child: Text("No Trailer availabe :/",
                       style: KCustomTextStyle.titleTextStyle())),

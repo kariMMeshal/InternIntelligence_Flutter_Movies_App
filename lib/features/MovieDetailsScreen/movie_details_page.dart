@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/styles/custom_text_style.dart';
 import 'package:flutter_movie_app_2/common/styles/long_text_button.dart';
+import 'package:flutter_movie_app_2/common/widgets/cashed_image.dart';
 import 'package:flutter_movie_app_2/common/widgets/custom_iconbutton.dart';
 import 'package:flutter_movie_app_2/common/widgets/sliding_button.dart';
 import 'package:flutter_movie_app_2/features/DownloadsScreen/providers/downloaded_movies_provider.dart';
@@ -70,17 +71,9 @@ class _MovieDetailsState extends State<MovieDetailsPage> {
                 children: [
                   Hero(
                     tag: "poster${movie!.id}",
-                    child: Image.network(
-                      "https://image.tmdb.org/t/p/original${movie.posterPath}",
-                      fit: BoxFit.cover,
-                      width: 500,
-                      height: 550,
-                      alignment: Alignment.topCenter,
-                      errorBuilder: (context, error, stackTrace) => const Icon(
-                          Icons.broken_image,
-                          size: 50,
-                          color: Colors.grey),
-                    ),
+                    child: KCashedImage.customCachedImage(
+                        "https://image.tmdb.org/t/p/original${movie.posterPath}",
+                        isPoster: true),
                   ),
                   Positioned(
                     bottom: 0,

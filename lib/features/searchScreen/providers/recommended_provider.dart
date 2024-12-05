@@ -54,8 +54,9 @@ Future<void> addClickedMovie(String userId, Movie movie) async {
 // Fetch movie recommendations based on the clicked movies
   Future<void> fetchMovieRecommendations() async {
     try {
-      if (clickedMovies.isEmpty)
+      if (clickedMovies.isEmpty) {
         return; // No clicked movies, no need to fetch recommendations
+      }
 
       isLoading = true;
       notifyListeners();

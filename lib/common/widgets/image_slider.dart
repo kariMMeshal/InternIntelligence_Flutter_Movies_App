@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_movie_app_2/common/widgets/cashed_image.dart';
 import 'package:flutter_movie_app_2/features/HomeScreen/providers/popular_movies_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class KImageSlider {
 
         return CarouselSlider(
           options: CarouselOptions(
-            height: 450.0,
+            height: 500.0,
             autoPlay: true,
             autoPlayCurve: Curves.linearToEaseOut,
             enlargeCenterPage: true,
@@ -24,24 +25,10 @@ class KImageSlider {
               builder: (BuildContext context) {
                 return Stack(
                   children: [
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: Image.network(
-                        "https://image.tmdb.org/t/p/original${movies[i].posterPath}",
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return const Center(
-                            child: Icon(
-                              Icons.broken_image,
-                              size: 50,
-                              color: Colors.grey,
-                            ),
-                          );
-                        },
-                      ),
+                      child: KCashedImage.customCachedImage(
+                          "https://image.tmdb.org/t/p/original${movies[i].posterPath}"),
                     ),
                   ],
                 );

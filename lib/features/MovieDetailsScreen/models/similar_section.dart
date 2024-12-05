@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app_2/common/animations/fade_transition.dart';
-import 'package:flutter_movie_app_2/common/widgets/image_card.dart';
+import 'package:flutter_movie_app_2/common/widgets/cashed_image.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/movie_details_page.dart';
 import 'package:flutter_movie_app_2/features/MovieDetailsScreen/providers/similar_provider.dart';
 import 'package:flutter_movie_app_2/utils/helpers/Fire_Store_Functions.dart/user_activity_firestore.dart';
@@ -39,9 +39,8 @@ class KSimilarSection {
                                     movieId: movie.id.toString(),
                                   ))));
                 },
-                child: KImageCard.imageCard(
-                  imagePath:
-                      "https://image.tmdb.org/t/p/original${movie.posterPath}",
+                child: KCashedImage.customCachedImage(
+                  "https://image.tmdb.org/t/p/original${movie.posterPath}",
                 ),
               );
             },

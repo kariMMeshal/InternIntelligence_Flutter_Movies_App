@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
           ),
           popularSection(context),
           latestSection(context),
+          const SizedBox(height: 50,)
         ],
       ),
     );
